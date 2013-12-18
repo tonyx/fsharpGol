@@ -17,11 +17,11 @@ module GameOfLife =
 
         neighborsAccumul((x,y,s),grid,[])
                            
-    let neighbors_alive (x,y,s) grid  =
+    let neighborsAlive (x,y,s) grid  =
         List.filter (fun (_,_,s) -> s = Alive) (neighborsOf (x,y,s) grid)
 
     let numOfNeighborsAlive (x,y,s) grid  =
-        List.length(neighbors_alive (x,y,s) grid)
+        List.length(neighborsAlive (x,y,s) grid)
     
     let nextGeneration grid = 
         let rec nextGenerationIter (remainingCells, accumul) =
