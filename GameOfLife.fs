@@ -27,14 +27,14 @@ module GameOfLife =
     let next_generation(grid) = 
         let rec next_generation_iter(remaining_cells: cell list, accumul: cell list): cell list =
             match remaining_cells with 
-                |(X,y,Alive)::T -> ( match numOfNeighborsAlive((X,y,Alive),grid) with
-                                    | (2|3) -> next_generation_iter(T, accumul @ [(X,y,Alive)])
-                                    | _ -> next_generation_iter(T, accumul @ [(X,y,Dead)])
+                |(x,y,Alive)::T -> ( match numOfNeighborsAlive((x,y,Alive),grid) with
+                                    | (2|3) -> next_generation_iter(T, accumul @ [(x,y,Alive)])
+                                    | _ -> next_generation_iter(T, accumul @ [(x,y,Dead)])
 
                                     )
-                |(X,y,Dead)::T -> ( match numOfNeighborsAlive ((X,y,Dead),grid) with
-                                    | 3 -> next_generation_iter(T, accumul @ [(X,y,Alive)])
-                                    | _ -> next_generation_iter(T, accumul @ [(X,y,Dead)])
+                |(x,y,Dead)::T -> ( match numOfNeighborsAlive ((x,y,Dead),grid) with
+                                    | 3 -> next_generation_iter(T, accumul @ [(x,y,Alive)])
+                                    | _ -> next_generation_iter(T, accumul @ [(x,y,Dead)])
                                     )
                 | [] -> accumul
 
