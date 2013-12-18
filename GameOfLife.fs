@@ -2,27 +2,25 @@ namespace gol
 module GameOfLife =
     type state = | Dead | Alive
     type cell = int*int*state
+                                           
+    let numOfNeighborsAlive (x,y,s) grid  =
+        let samePosition (x1,y1) (x2,y2) =
+            x1 = x2 && y1 = y2
 
-    let samePosition (x1,y1) (x2,y2) =
-        x1 = x2 && y1 = y2
-    
-    let neighborsOf  (x,y,s) grid =   
         let areNeighbors (x1,y1,_) (x2,y2,_) =
-            abs (x1 - x2) <=1 && abs (y1 - y2) <= 1 && not (samePosition (x1,y1) (x2,y2))
-       
-        let rec neighborsAccumul (acell, grid, accumul) = 
+            abs (x1 - x2) <=1 && abs (y1 - y2) <= 1 && not (samePosition (x1,y1) (x2,y2)) 
+                   
+        let rec neighbors (acell, grid, accumul) = 
             match grid with
                 | [] -> accumul
-                | H::T -> if areNeighbors acell H then neighborsAccumul(acell,T, H::accumul) else neighborsAccumul(acell,T,accumul)
+                | H::T -> if areNeighbors acell H then neighbors(acell,T, H::accumul) else neighbors(acell,T,accumul)
 
-        neighborsAccumul((x,y,s),grid,[])
-                           
-    let neighborsAlive (x,y,s) grid  =
-        List.filter (fun (_,_,s) -> s = Alive) (neighborsOf (x,y,s) grid)
+        let neighborsAlive (x,y,s) grid  =
+            List.filter (fun (_,_,s) -> s = Alive) (neighbors( (x,y,s),grid,[]))
 
-    let numOfNeighborsAlive (x,y,s) grid  =
         List.length(neighborsAlive (x,y,s) grid)
-    
+ 
+                           
     let nextGeneration grid = 
         let rec nextGenerationIter (remainingCells, accumul) =
             match remainingCells with 

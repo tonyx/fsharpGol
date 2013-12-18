@@ -10,43 +10,24 @@ namespace tests
         let firstCell = (1,1,Alive)
         Assert.AreEqual((1,1,Alive),firstCell)
 
-    [<Test>]
-        let testSamePosition() =
-        Assert.IsTrue(samePosition (1,1) (1,1))
-
-    [<Test>]
-        let empty_grid_contains_neighbors_of_noone() =
-            Assert.IsTrue(neighborsOf(1,1 ,Alive) [] = [])
 
     [<Test>]
         let neithbors_of_one_cell() =
-            Assert.IsTrue(neighborsOf (1,1,Alive) [(0,1,Alive)] = [(0,1,Alive)])
-
-    [<Test>]
-        let neithbors_of_one_cell2() =
-            Assert.IsTrue(neighborsOf (1,1,Alive) [(0,1,Alive)] = [(0,1,Alive)])
+            Assert.IsTrue(numOfNeighborsAlive (1,1,Alive) [(0,1,Alive)] = 1)
 
     [<Test>]
         let exclude_the_cell_itself_from_neighbors() =
-            Assert.IsTrue(neighborsOf (1,1,Alive) [(0,1,Alive) ; (1,1,Alive)] = [(0,1,Alive)])
-
+            Assert.IsTrue(numOfNeighborsAlive (1,1,Alive) [(0,1,Alive) ; (1,1,Alive)] = 1)
 
     [<Test>]
         let exclude_the_cell_itself_from_neighbors2() =
-            Assert.IsTrue(neighborsOf (1,1,Alive) [(0,1,Alive) ; (1,1,Alive); (0,0,Alive)] = [(0,0,Alive);(0,1,Alive)])
+            Assert.IsTrue(numOfNeighborsAlive (1,1,Alive) [(0,1,Alive) ; (1,1,Alive); (0,0,Alive)] = 2)
 
-    [<Test>]
-        let num_of_neighbors_alive() =
-            Assert.IsTrue(neighborsAlive(1,1,Alive) [(0,1,Alive) ; (1,1,Alive); (0,0,Dead)] = [(0,1,Alive)])
 
     [<Test>]
         let num_of_neighbors_alive_test2() =
             let celllist: cell list = [(0,1,Alive) ; (1,1,Alive); (0,0,Dead)]
             Assert.IsTrue ( numOfNeighborsAlive (0,1,Alive) [(0,1,Alive) ; (1,1,Alive); (0,0,Dead)] = 1)           
-
-    [<Test>]
-        let num_of_neighbors_alived_test3() =
-            Assert.IsTrue ( List.length(neighborsAlive (1,1,Alive) [(0,1,Alive) ; (1,1,Alive); (0,0,Dead)]) = 1)
 
 
     [<Test>]
