@@ -3,44 +3,40 @@ module GameOfLife =
     type state = | Dead | Alive
     type cell = int*int*state
 
-    let samePosition ((x1,y1), (x2,y2)) =
+    let samePosition (x1,y1) (x2,y2) =
         x1 = x2 && y1 = y2
     
-    let neighbors_of ((x,y,s),grid: cell list) =   
-        let are_neighbors ((x1,y1,s1),(x2,y2,s2)) =
-            abs (x1 - x2) <=1 && abs (y1 - y2) <= 1 && not (samePosition ((x1,y1), (x2,y2)))
+    let neighborsOf  (x,y,s) grid =   
+        let areNeighbors (x1,y1,_) (x2,y2,_) =
+            abs (x1 - x2) <=1 && abs (y1 - y2) <= 1 && not (samePosition (x1,y1) (x2,y2))
        
-        let rec neighbors_accumul (acell: cell, grid: cell list, accumul: cell list): cell list = 
+        let rec neighborsAccumul (acell, grid, accumul) = 
             match grid with
                 | [] -> accumul
-                | H::T -> if are_neighbors(acell,H) then neighbors_accumul(acell,T, H::accumul) else neighbors_accumul(acell,T,accumul)
+                | H::T -> if areNeighbors acell H then neighborsAccumul(acell,T, H::accumul) else neighborsAccumul(acell,T,accumul)
 
-        neighbors_accumul((x,y,s),grid,[])
-
+        neighborsAccumul((x,y,s),grid,[])
                            
-    let neighbors_alive((x,y,c): cell ,grid: cell list): cell list =
-        List.filter (fun (_,_,s) -> s = Alive) (neighbors_of((x,y,c),grid))
+    let neighbors_alive (x,y,s) grid  =
+        List.filter (fun (_,_,s) -> s = Alive) (neighborsOf (x,y,s) grid)
 
-    let numOfNeighborsAlive ((x,y,s): cell,d: cell list): int  =
-        List.length(neighbors_alive((x,y,s),d))
+    let numOfNeighborsAlive (x,y,s) grid  =
+        List.length(neighbors_alive (x,y,s) grid)
     
-    let next_generation(grid) = 
-        let rec next_generation_iter(remaining_cells: cell list, accumul: cell list): cell list =
-            match remaining_cells with 
-                |(x,y,Alive)::T -> ( match numOfNeighborsAlive((x,y,Alive),grid) with
-                                    | (2|3) -> next_generation_iter(T, accumul @ [(x,y,Alive)])
-                                    | _ -> next_generation_iter(T, accumul @ [(x,y,Dead)])
-
+    let nextGeneration grid = 
+        let rec nextGenerationIter (remainingCells, accumul) =
+            match remainingCells with 
+                |(x,y,Alive)::T -> ( match numOfNeighborsAlive(x,y,Alive) grid with
+                                    | (2|3) -> nextGenerationIter(T, accumul @ [(x,y,Alive)])
+                                    | _ -> nextGenerationIter(T, accumul @ [(x,y,Dead)])
                                     )
-                |(x,y,Dead)::T -> ( match numOfNeighborsAlive ((x,y,Dead),grid) with
-                                    | 3 -> next_generation_iter(T, accumul @ [(x,y,Alive)])
-                                    | _ -> next_generation_iter(T, accumul @ [(x,y,Dead)])
+                |(x,y,Dead)::T -> ( match numOfNeighborsAlive (x,y,Dead) grid with
+                                    | 3 -> nextGenerationIter(T, accumul @ [(x,y,Alive)])
+                                    | _ -> nextGenerationIter(T, accumul @ [(x,y,Dead)])
                                     )
                 | [] -> accumul
 
-        next_generation_iter(grid, [])
-
-  
+        nextGenerationIter (grid, [])
 
 #if COMPILED
 
