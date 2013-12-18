@@ -6,7 +6,7 @@ module HisTests =
    open NUnit.Framework
    
     [<Test>]
-    let anotherSillyTestSSSSS() = 
+    let sillyTest() = 
         let firstCell = (1,1,Alive)
         Assert.AreEqual((1,1,Alive),firstCell)
 

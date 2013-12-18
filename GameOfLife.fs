@@ -40,14 +40,12 @@ module GameOfLife =
 
         next_generation_iter(grid, [])
 
-                                                                                   
-
+  
 
 #if COMPILED
 
 module BoilerPlateForForm =
     [<System.STAThread>]
-    printf "%s" "asdfasdfasdfasfads"
     do ()
 //    do System.Windows.Forms.Application.Run()
 
