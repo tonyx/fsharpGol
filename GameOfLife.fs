@@ -60,22 +60,22 @@ module GameOfLife =
 
 
 
-module start = 
-        open System
-        open Gtk
-
-        [<EntryPoint>]
-        let Main(args) = 
-            Application.Init()
-
-            let label = new Label()
-            label.Text <- "oila'"
-            let win: MyWindow = new MyWindow()
-            win.Add(label)
-//            win.Show()
-            win.ShowAll()
-            Application.Run()
-            0
+//module start = 
+//        open System
+//        open Gtk
+//
+//        [<EntryPoint>]
+//        let Main(args) = 
+//            Application.Init()
+//
+//            let label = new Label()
+//            label.Text <- "oila'"
+//            let win: MyWindow = new MyWindow()
+//            win.Add(label)
+////            win.Show()
+//            win.ShowAll()
+//            Application.Run()
+//            0
 
 
 
