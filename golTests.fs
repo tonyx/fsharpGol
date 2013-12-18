@@ -1,5 +1,5 @@
-
-module HisTests =
+namespace tests 
+ module HisTests =
    
    open gol.GameOfLife 
    open System

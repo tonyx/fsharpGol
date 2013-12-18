@@ -1,5 +1,5 @@
 game of life in fsharp
-(at the moment only the next generation funciton, no graphics).
+(at the moment only the next generation function and tests, no graphics neither main).
 
 todo: uniform naming convention
 todo: gtk graphics (xamarin/mono)

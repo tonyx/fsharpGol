@@ -40,10 +40,50 @@ module GameOfLife =
 
 #if COMPILED
 
-module BoilerPlateForForm =
-    [<System.STAThread>]
-    do ()
-//    do System.Windows.Forms.Application.Run()
+
+ module MainWindow =
+    
+        open System
+        open Gtk
+
+        type MyWindow() as this =
+            inherit Window("MainWindow")
+            
+            do this.SetDefaultSize(400,300)
+            do this.DeleteEvent.AddHandler(fun o e -> this.OnDeleteEvent(o,e))
+            do this.ShowAll()
+            
+            member this.OnDeleteEvent(o,e:DeleteEventArgs) = 
+                Application.Quit ()
+                e.RetVal <- true
+
+
+
+
+module start = 
+        open System
+        open Gtk
+
+        [<EntryPoint>]
+        let Main(args) = 
+            Application.Init()
+
+            let label = new Label()
+            label.Text <- "oila'"
+            let win: MyWindow = new MyWindow()
+            win.Add(label)
+//            win.Show()
+            win.ShowAll()
+            Application.Run()
+            0
+
+
+
+
+//module BoilerPlateForForm =
+//    [<System.STAThread>]
+//    do ()
+////    do System.Windows.Forms.Application.Run()
 
 #endif
 
