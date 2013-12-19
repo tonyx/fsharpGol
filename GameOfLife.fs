@@ -10,11 +10,11 @@ module GameOfLife =
         let areNeighbors (x1,y1,_) (x2,y2,_) =
             abs (x1 - x2) <=1 && abs (y1 - y2) <= 1 && not (samePosition (x1,y1) (x2,y2)) 
                                
-        let rec neighbors (acell, grid, accumul) =   
+        let neighbors (acell, grid) =   
             List.filter(fun c -> areNeighbors acell c) grid                     
 
         let neighborsAlive (x,y,s) grid  =
-            List.filter (fun (_,_,s) -> s = Alive) (neighbors( (x,y,s),grid,[]))
+            List.filter (fun (_,_,s) -> s = Alive) (neighbors( (x,y,s),grid))
 
         List.length(neighborsAlive (x,y,s) grid)
  
