@@ -5,11 +5,6 @@ namespace tests
    open System
    open NUnit.Framework
    
-    [<Test>]
-    let sillyTest() = 
-        let firstCell = (1,1,Alive)
-        Assert.AreEqual((1,1,Alive),firstCell)
-
 
     [<Test>]
         let neithbors_of_one_cell() =
