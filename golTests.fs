@@ -8,21 +8,21 @@ namespace tests
 
     [<Test>]
         let neithbors_of_one_cell() =
-            Assert.IsTrue(numOfNeighborsAlive (1,1,Alive) [(0,1,Alive)] = 1)
+            Assert.IsTrue(numOfNeighboursAlive (1,1,Alive) [(0,1,Alive)] = 1)
 
     [<Test>]
         let exclude_the_cell_itself_from_neighbors() =
-            Assert.IsTrue(numOfNeighborsAlive (1,1,Alive) [(0,1,Alive) ; (1,1,Alive)] = 1)
+            Assert.IsTrue(numOfNeighboursAlive (1,1,Alive) [(0,1,Alive) ; (1,1,Alive)] = 1)
 
     [<Test>]
         let exclude_the_cell_itself_from_neighbors2() =
-            Assert.IsTrue(numOfNeighborsAlive (1,1,Alive) [(0,1,Alive) ; (1,1,Alive); (0,0,Alive)] = 2)
+            Assert.IsTrue(numOfNeighboursAlive (1,1,Alive) [(0,1,Alive) ; (1,1,Alive); (0,0,Alive)] = 2)
 
 
     [<Test>]
         let num_of_neighbors_alive_test2() =
             let celllist: cell list = [(0,1,Alive) ; (1,1,Alive); (0,0,Dead)]
-            Assert.IsTrue ( numOfNeighborsAlive (0,1,Alive) [(0,1,Alive) ; (1,1,Alive); (0,0,Dead)] = 1)           
+            Assert.IsTrue ( numOfNeighboursAlive (0,1,Alive) [(0,1,Alive) ; (1,1,Alive); (0,0,Dead)] = 1)           
 
 
     [<Test>]
